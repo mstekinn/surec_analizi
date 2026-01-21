@@ -1,18 +1,14 @@
 import pandas as pd
 
-# 1. Oluşturduğumuz CSV dosyasını okuyoruz
 df = pd.read_csv('lojistik_verisi.csv')
 
-# 2. Tarih sütunlarını datetime formatına çeviriyoruz
-# (CSV'den okurken tarih formatı bozulabilir, bunu düzeltmek şarttır)
+# Tarih sütunlarını datetime formatına çeviriyoruz
 date_cols = ['Siparis_Tarihi', 'Depodan_Cikis_Tarihi', 'Subeye_Varis_Tarihi', 
              'Dagitima_Cikis_Tarihi', 'Teslim_Tarihi']
 
 for col in date_cols:
     df[col] = pd.to_datetime(df[col])
 
-# 3. SÜRE HESAPLAMALARI (Feature Engineering)
-# Tüm farkları 'Saat' cinsinden hesaplayıp virgülden sonra 2 basamak alacağız.
 
 # A. Depo İşleme Süresi (Sipariş -> Kargoya Veriliş)
 df['Sure_Depo_Hazirlik'] = (df['Depodan_Cikis_Tarihi'] - df['Siparis_Tarihi']).dt.total_seconds() / 3600
@@ -61,4 +57,5 @@ plt.ylabel('Sipariş Sayısı')
 
 plt.tight_layout()
 plt.savefig('lojistik_analiz_grafigi.png', dpi=300) 
+
 plt.show()
