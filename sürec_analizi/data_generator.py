@@ -3,14 +3,13 @@ import numpy as np
 import random
 from datetime import datetime, timedelta
 
-# 1. Sabit Değişkenler
 NUM_ORDERS = 1000  # Oluşturulacak sipariş sayısı
 CITIES = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya', 'Adana']
 CARGO_FIRMS = ['HızlıKargo', 'Yurtİçi', 'Aras', 'MNG']
 
 data = []
 
-# 2. Rastgele Veri Üretme Fonksiyonu
+# Rastgele Veri Üretme Fonksiyonu
 def generate_order_data(order_id):
     # a. Sipariş Tarihi (Son 3 ay içinde rastgele bir zaman)
     days_back = random.randint(1, 90)
@@ -65,10 +64,10 @@ for i in range(1, NUM_ORDERS + 1):
 
 df = pd.DataFrame(data)
 
-# CSV Olarak Kaydetme
 df.to_csv('lojistik_verisi.csv', index=False)
 print(f"{NUM_ORDERS} adet sipariş verisi 'lojistik_verisi.csv' olarak kaydedildi!")
 
 # İlk 5 satırı göster
 print("\nOluşturulan veriden örnekler:")
+
 print(df.head())
